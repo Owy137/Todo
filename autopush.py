@@ -14,18 +14,32 @@ class GitCommitPushHandler(FileSystemEventHandler):
 
         # Check if the event is a file modification (not deletion)
         if event.event_type == 'modified':
-            print(f"File {event.src_path} modified. Committing and pushing changes...")
-            self.git_commit_push()
+            print(f"File {event.src_path} modified. Checking for changes...")
+
+            # Check if there are uncommitted changes before committing
+            if self.has_uncommitted_changes():
+                print(f"Uncommitted changes found. Committing and pushing changes...")
+                self.git_commit_push()
+            else:
+                print("No changes to commit.")
+
+    def has_uncommitted_changes(self):
+        # Check for uncommitted changes using `git status --porcelain`
+        result = subprocess.run(['git', 'status', '--porcelain'], cwd=repo_path, text=True, capture_output=True)
+
+        # If the result is non-empty, there are uncommitted changes
+        return len(result.stdout.strip()) > 0
 
     def git_commit_push(self):
-        # Navigate to the repo directory
+        # Navigate to the repo directory (in case we're not already there)
         os.chdir(repo_path)
 
         # Stage all changes
         subprocess.run(['git', 'add', '.'])
 
-        # Commit changes
-        subprocess.run(['git', 'commit', '-m', 'Auto commit and push'])
+        # Commit changes if there are changes to commit
+        commit_message = "Auto commit and push"
+        subprocess.run(['git', 'commit', '-m', commit_message])
 
         # Push to the remote repo
         subprocess.run(['git', 'push'])
