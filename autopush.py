@@ -5,7 +5,7 @@ from watchdog.events import FileSystemEventHandler
 import subprocess
 
 # Path to your Git repository
-repo_path = "C:/Users/owyya/OneDrive/Documents/Rainmeter/Skins/BlueArchive/@Resources/notes"
+repo_path = "C:/Users/owyya/OneDrive/Documents/todo"
 
 class GitCommitPushHandler(FileSystemEventHandler):
     def on_modified(self, event):
