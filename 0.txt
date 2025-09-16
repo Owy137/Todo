@@ -1,7 +1,6 @@
 Comp Security - 
-Add Charlie onto Alice's friend list
-Read book
-Fix VM
+Using HTTP live header to obtain URL containing cookies when adding a friend
+Paste url into the img src on attacker/addfriend.html
 
 Sociology
 Read chapters 1-3 Mango Tree - Tuesday
