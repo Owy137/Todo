@@ -1,6 +1,7 @@
 Comp Security - 
 Add Charlie onto Alice's friend list
-Read booFix VM
+Read book
+Fix VM
 
 Sociology
 Read chapters 1-3 Mango Tree - Tuesday
